@@ -1,4 +1,62 @@
 
+# version: "3.9"
+
+# services:
+#   app:
+#     build: .
+#     restart: always
+#     command: uwsgi --socket :8000 --workers 4 --master --enable-threads --module storefront.wsgi
+
+#     # command: sh -c "python /app/manage.py runserver 0.0.0.0:8000"  # Running Django dev server
+#     volumes:
+#       - ./storefront:/app  # Mapping the storefront directory into the container
+#     ports:
+#       - "8000:8000"  # Expose the port that the Django app runs on
+#     env_file:
+#       - .env
+#     environment:
+#       - DJANGO_SETTINGS_MODULE=storefront.settings.dev  # Set the Django settings module
+#       - SECRET_KEY=${SECRET_KEY}  # Update the variable name to match the .env and Django settings
+#       - DJANGO_ALLOWED_HOSTS=${DJANGO_ALLOWED_HOSTS}  # Ensure this matches the .env file
+#       - RDS_DB_NAME=${RDS_DB_NAME}  # MySQL database name
+#       - RDS_USERNAME=${RDS_USERNAME}  # MySQL database user
+#       - RDS_PASSWORD=${RDS_PASSWORD}  # MySQL database password
+#       - RDS_HOSTNAME=${RDS_HOSTNAME}  # MySQL database host
+#       - RDS_PORT=${RDS_PORT}  # MySQL database port (typically 3306)
+
+#   proxy:
+#     build:
+#       context: ./docker/proxy
+#     restart: always
+#     depends_on:
+#       - app
+#     ports:
+#       - "80:80"
+#       - "443:443"
+#     volumes:
+#       - certbot-web:/vol/www
+#       - proxy-dhparams:/vol/proxy
+#       - certbot-certs:/etc/letsencrypt
+#     environment:
+#       - DOMAIN=${DOMAIN}
+
+#   certbot:
+#     build:
+#       context: ./docker/certbot
+#     command: echo "Skipping..."
+#     environment:
+#       - EMAIL=${ACME_DEFAULT_EMAIL}
+#       - DOMAIN=${DOMAIN}
+#     volumes:
+#       - certbot-web:/vol/www
+#       - certbot-certs:/etc/letsencrypt/
+#     depends_on:
+#       - proxy
+
+# volumes:
+#   certbot-web:
+#   proxy-dhparams:
+#   certbot-certs:
 version: "3.9"
 
 services:
@@ -6,8 +64,6 @@ services:
     build: .
     restart: always
     command: uwsgi --socket :8000 --workers 4 --master --enable-threads --module storefront.wsgi
-
-    # command: sh -c "python /app/manage.py runserver 0.0.0.0:8000"  # Running Django dev server
     volumes:
       - ./storefront:/app  # Mapping the storefront directory into the container
     ports:
@@ -15,7 +71,7 @@ services:
     env_file:
       - .env
     environment:
-      - DJANGO_SETTINGS_MODULE=storefront.settings.dev  # Set the Django settings module
+      - DJANGO_SETTINGS_MODULE=storefront_directory.storefront.storefront.settings.dev  # Set the correct Django settings module
       - SECRET_KEY=${SECRET_KEY}  # Update the variable name to match the .env and Django settings
       - DJANGO_ALLOWED_HOSTS=${DJANGO_ALLOWED_HOSTS}  # Ensure this matches the .env file
       - RDS_DB_NAME=${RDS_DB_NAME}  # MySQL database name
