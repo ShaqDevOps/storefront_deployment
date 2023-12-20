@@ -52,17 +52,19 @@ FROM python:3.10-alpine3.16
 # Set environment variables
 ENV PYTHONUNBUFFERED 1
 ENV PYTHONPATH /app
-ENV DJANGO_SETTINGS_MODULE storefront.storefront.dev  # Corrected path
+ENV DJANGO_SETTINGS_MODULE storefront.storefront.dev
 
 # Install dependencies
 RUN apk add --upgrade --no-cache build-base linux-headers libffi-dev openssl-dev mariadb-connector-c-dev pcre-dev
 
 # Install Python dependencies
 COPY requirements.txt /requirements.txt
-RUN pip install --upgrade pip && pip install -r /requirements.txt
+RUN pip install --no-cache-dir -r /requirements.txt
 
-# Copy the entire storefront directory into /app in the container
-COPY ./storefront/storefront /app
+# Copy the entire Django project into /app in the container
+# Ensure this includes manage.py and the storefront directory
+COPY ./storefront /app
+# COPY ./manage.py /app
 
 # Set the working directory to /app
 WORKDIR /app
@@ -71,5 +73,4 @@ WORKDIR /app
 RUN adduser --disabled-password --no-create-home django
 USER django
 
-# Command to start uWSGI with your Django application
 CMD ["uwsgi", "--socket", ":8000", "--workers", "4", "--master", "--enable-threads", "--module", "storefront.wsgi"]
