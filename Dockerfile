@@ -1,18 +1,29 @@
+# Use the base image with Python
 FROM python:3.10-alpine3.16
 
+# Set environment variables
 ENV PYTHONBUFFERED 1
 
-COPY requirements.txt /requirements.txt
-RUN apk add --upgrade --no-cache build-base linux-headers && \
-    pip install --upgrade pip && \
-    pip install -r /requirements.txt
+# Install system dependencies
+RUN apk --no-cache add build-base linux-headers mariadb-dev
 
-# Assuming your manage.py is in the storefront directory and that's the root of your project
-COPY . /app
-WORKDIR /app/storefront
+# Create a directory for your application
+RUN mkdir /app
 
+# Set the working directory
+WORKDIR /app
+
+# Copy the requirements file into the container
+COPY requirements.txt /app/
+
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the rest of your application code
+COPY . /app/
+
+# Create a non-root user to run the application
 RUN adduser --disabled-password --no-create-home django
-
 USER django
 
 # Update the module to match your project's WSGI application
