@@ -47,27 +47,37 @@
 # # CMD ["uwsgi", "--socket", ":8000", "--workers", "4", "--master", "--enable-threads", "--module", "storefront.wsgi"]
 # CMD ["uwsgi", "--socket", ":8000", "--workers", "4", "--master", "--enable-threads", "--module", "storefront.wsgi"]
 
-
 FROM python:3.10-alpine3.16
 
-ENV PYTHONBUFFERED 1
+# Set environment variables
+ENV PYTHONUNBUFFERED 1
 ENV PYTHONPATH /app
-ENV DJANGO_SETTINGS_MODULE storefront.storefront.dev
+ENV DJANGO_SETTINGS_MODULE storefront.storefront.settings.dev  # Correct the path
 
-RUN apk add --upgrade --no-cache build-base linux-headers libffi-dev openssl-dev mariadb-connector-c-dev pcre-dev
+# Install dependencies required for psycopg2, mysqlclient, etc.
+RUN apk add --update --no-cache \
+    build-base \
+    linux-headers \
+    libffi-dev \
+    openssl-dev \
+    mariadb-connector-c-dev \
+    pcre-dev \
+    mariadb-dev  # Add this if using MySQL
+    # Add any other dependencies you might need
 
-COPY requirements.txt /requirements.txt
-RUN pip install --upgrade pip && pip install -r /requirements.txt
+# Copy requirements.txt and install Python dependencies
+COPY ./requirements.txt /requirements.txt
+RUN pip install --no-cache-dir -r /requirements.txt
 
-# Copy the entire storefront directory into /app in the container
-COPY storefront/ /app
+# Copy your Django project into the container at /app
+COPY ./storefront /app
 
 # Set the working directory to /app
 WORKDIR /app
 
+# Create a user to run the Django app
 RUN adduser --disabled-password --no-create-home django
 USER django
 
-# Update the module to match your project's WSGI application
+# Command to start uWSGI with your Django application
 CMD ["uwsgi", "--socket", ":8000", "--workers", "4", "--master", "--enable-threads", "--module", "storefront.wsgi"]
-
