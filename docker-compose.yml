@@ -3,18 +3,18 @@ version: "3.9"
 services:
   app:
     build:
-      context: ./new_django_app  # Update to the new app's directory
+      context: .  # Assuming the Dockerfile is in the root of your project
     command: sh -c "python manage.py runserver 0.0.0.0:9000"
     volumes:
-      - ./new_django_app:/app  # Update this if the app structure is different
+      - .:/app  # Mapping the entire project directory to /app in the container
     ports:
-      - 9000:9000
+      - "9000:9000"
     environment:
-      - DJANGO_DEBUG=1
-      - DATABASE_NAME=${DATABASE_NAME}  # MySQL database name
-      - DATABASE_USER=${DATABASE_USER}  # MySQL database user
-      - DATABASE_PASSWORD=${DATABASE_PASSWORD}  # MySQL database password
-      - DATABASE_HOST=${DATABASE_HOST}  # MySQL database host
-      - DATABASE_PORT=${DATABASE_PORT}  # MySQL database port
-      
-    version: "3.9"
+      DJANGO_DEBUG: "1"
+      SECRET_KEY: "${SECRET_KEY}"
+      DOMAIN: "${DOMAIN}"
+      RDS_DB_NAME: "${DATABASE_NAME}"
+      RDS_USERNAME: "${DATABASE_USER}"
+      RDS_PASSWORD: "${DATABASE_PASSWORD}"
+      RDS_HOSTNAME: "${DATABASE_HOST}"
+      RDS_PORT: "${DATABASE_PORT}"
