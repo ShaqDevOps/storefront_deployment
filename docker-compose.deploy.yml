@@ -69,6 +69,8 @@ services:
       - RDS_PASSWORD=${RDS_PASSWORD}  # MySQL database password
       - RDS_HOSTNAME=${RDS_HOSTNAME}  # MySQL database host
       - RDS_PORT=${RDS_PORT}  # MySQL database port (typically 3306)
+      - DJANGO_SETTINGS_MODULE=storefront.settings.dev  # Set the Django settings module
+
   proxy:
     build:
       context: ./docker/proxy
