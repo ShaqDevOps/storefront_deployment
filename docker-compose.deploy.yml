@@ -64,8 +64,8 @@ services:
     build: .
     restart: always
     command: uwsgi --socket :8000 --workers 4 --master --enable-threads --module storefront.wsgi
-    volumes:
-      - ./storefront:/app  # Mapping the storefront directory into the container
+    # volumes:
+    #   - ./storefront:/app  # Mapping the storefront directory into the container
     ports:
       - "8000:8000"  # Expose the port that the Django app runs on
     env_file:
