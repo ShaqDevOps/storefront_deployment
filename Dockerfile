@@ -52,7 +52,7 @@ FROM python:3.10-alpine3.16
 
 ENV PYTHONBUFFERED 1
 ENV PYTHONPATH /app
-ENV DJANGO_SETTINGS_MODULE storefront.storefront.settings.dev
+ENV DJANGO_SETTINGS_MODULE storefront.storefront.dev
 
 RUN apk add --upgrade --no-cache build-base linux-headers libffi-dev openssl-dev mariadb-connector-c-dev pcre-dev
 
@@ -60,11 +60,10 @@ COPY requirements.txt /requirements.txt
 RUN pip install --upgrade pip && pip install -r /requirements.txt
 
 # Copy the entire storefront directory into /app in the container
-COPY ./storefront /app/storefront
-
+COPY storefront/ /app
 
 # Set the working directory to /app
-WORKDIR /app/storefront
+WORKDIR /app
 
 RUN adduser --disabled-password --no-create-home django
 USER django
