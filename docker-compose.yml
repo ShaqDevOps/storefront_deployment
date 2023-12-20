@@ -1,0 +1,20 @@
+version: "3.9"
+
+services:
+  app:
+    build:
+      context: ./new_django_app  # Update to the new app's directory
+    command: sh -c "python manage.py runserver 0.0.0.0:9000"
+    volumes:
+      - ./new_django_app:/app  # Update this if the app structure is different
+    ports:
+      - 9000:9000
+    environment:
+      - DJANGO_DEBUG=1
+      - DATABASE_NAME=${DATABASE_NAME}  # MySQL database name
+      - DATABASE_USER=${DATABASE_USER}  # MySQL database user
+      - DATABASE_PASSWORD=${DATABASE_PASSWORD}  # MySQL database password
+      - DATABASE_HOST=${DATABASE_HOST}  # MySQL database host
+      - DATABASE_PORT=${DATABASE_PORT}  # MySQL database port
+      
+    version: "3.9"
