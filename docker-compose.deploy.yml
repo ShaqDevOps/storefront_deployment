@@ -73,7 +73,7 @@ services:
     environment:
       - DJANGO_SETTINGS_MODULE=storefront.dev  # Set the correct Django settings module
       - SECRET_KEY=${SECRET_KEY}  # Update the variable name to match the .env and Django settings
-      - ALLOWED_HOSTS=${DOMAIN}  # Ensure this matches the .env file
+      - DOMAIN=${DOMAIN}  # Ensure this matches the .env file
       - RDS_DB_NAME=${RDS_DB_NAME}  # MySQL database name
       - RDS_USERNAME=${RDS_USERNAME}  # MySQL database user
       - RDS_PASSWORD=${RDS_PASSWORD}  # MySQL database password
