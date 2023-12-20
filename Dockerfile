@@ -21,7 +21,7 @@
 FROM python:3.10-alpine3.16
 
 ENV PYTHONBUFFERED 1
-ENV DJANGO_SETTINGS_MODULE="storefront.settings.dev"
+# ENV DJANGO_SETTINGS_MODULE="storefront.settings.dev"
 ENV PYTHONPATH /app
 
 
