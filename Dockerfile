@@ -29,8 +29,12 @@ COPY requirements.txt /requirements.txt
 RUN pip install --upgrade pip && pip install -r /requirements.txt
 
 # Assuming your manage.py is in the storefront directory and that's the root of your project
-COPY . /app
-WORKDIR /app/storefront_deployment
+# Copy the entire storefront directory into /app in the container
+COPY ./storefront /app
+
+# Set the working directory to /app
+WORKDIR /app
+
 
 RUN adduser --disabled-password --no-create-home django
 
