@@ -30,7 +30,7 @@ RUN pip install --upgrade pip && pip install -r /requirements.txt
 
 # Assuming your manage.py is in the storefront directory and that's the root of your project
 # Copy the entire storefront directory into /app in the container
-COPY ./storefront /app
+COPY ./storefront_development /app
 
 # Set the working directory to /app
 WORKDIR /app
@@ -41,4 +41,5 @@ RUN adduser --disabled-password --no-create-home django
 USER django
 
 # Update the module to match your project's WSGI application
+# CMD ["uwsgi", "--socket", ":8000", "--workers", "4", "--master", "--enable-threads", "--module", "storefront.wsgi"]
 CMD ["uwsgi", "--socket", ":8000", "--workers", "4", "--master", "--enable-threads", "--module", "storefront.wsgi"]

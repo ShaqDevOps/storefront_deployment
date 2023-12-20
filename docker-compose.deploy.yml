@@ -5,7 +5,9 @@ services:
   app:
     build: .
     restart: always
-    command: sh -c "python /app/manage.py runserver 0.0.0.0:8000"  # Running Django dev server
+    command: uwsgi --socket :8000 --workers 4 --master --enable-threads --module storefront.wsgi
+
+    # command: sh -c "python /app/manage.py runserver 0.0.0.0:8000"  # Running Django dev server
     volumes:
       - ./storefront:/app  # Mapping the storefront directory into the container
     ports:
