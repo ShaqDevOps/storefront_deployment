@@ -5,19 +5,17 @@
 #   app:
 #     build: .
 #     restart: always
-#     command: uwsgi --socket :8000 --workers 4 --master --enable-threads --module storefront.wsgi
-
-#     # command: sh -c "python /app/manage.py runserver 0.0.0.0:8000"  # Running Django dev server
-#     volumes:
-#       - ./storefront:/app  # Mapping the storefront directory into the container
+#     command: uwsgi --socket :9000 --workers 4 --master --enable-threads --module storefront.wsgi
+#     # volumes:
+#     #   - ./storefront:/app  # Mapping the storefront directory into the container
 #     ports:
-#       - "8000:8000"  # Expose the port that the Django app runs on
+#       - "9000:9000"  # Expose the port that the Django app runs on
 #     env_file:
 #       - .env
 #     environment:
-#       - DJANGO_SETTINGS_MODULE=storefront.settings.dev  # Set the Django settings module
+#       - DJANGO_SETTINGS_MODULE=storefront.dev  # Set the correct Django settings module
 #       - SECRET_KEY=${SECRET_KEY}  # Update the variable name to match the .env and Django settings
-#       - DJANGO_ALLOWED_HOSTS=${DJANGO_ALLOWED_HOSTS}  # Ensure this matches the .env file
+#       - DJANGO_ALLOWED_HOSTS=${DOMAIN}  # Ensure this matches the .env file
 #       - RDS_DB_NAME=${RDS_DB_NAME}  # MySQL database name
 #       - RDS_USERNAME=${RDS_USERNAME}  # MySQL database user
 #       - RDS_PASSWORD=${RDS_PASSWORD}  # MySQL database password
@@ -57,28 +55,20 @@
 #   certbot-web:
 #   proxy-dhparams:
 #   certbot-certs:
+
+
 version: "3.9"
 
 services:
   app:
     build: .
     restart: always
-    command: uwsgi --socket :9000 --workers 4 --master --enable-threads --module storefront.wsgi
-    # volumes:
-    #   - ./storefront:/app  # Mapping the storefront directory into the container
     ports:
-      - "9000:9000"  # Expose the port that the Django app runs on
+      - "9000:9000"
     env_file:
       - .env
     environment:
-      - DJANGO_SETTINGS_MODULE=storefront.dev  # Set the correct Django settings module
-      - SECRET_KEY=${SECRET_KEY}  # Update the variable name to match the .env and Django settings
-      - DJANGO_ALLOWED_HOSTS=${DOMAIN}  # Ensure this matches the .env file
-      - RDS_DB_NAME=${RDS_DB_NAME}  # MySQL database name
-      - RDS_USERNAME=${RDS_USERNAME}  # MySQL database user
-      - RDS_PASSWORD=${RDS_PASSWORD}  # MySQL database password
-      - RDS_HOSTNAME=${RDS_HOSTNAME}  # MySQL database host
-      - RDS_PORT=${RDS_PORT}  # MySQL database port (typically 3306)
+      - DJANGO_SETTINGS_MODULE=storefront.dev
 
   proxy:
     build:
