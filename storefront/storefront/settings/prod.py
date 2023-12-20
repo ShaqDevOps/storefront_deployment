@@ -13,7 +13,7 @@ DEBUG = True
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 
-ALLOWED_HOSTS = ['shaqserver.com']
+ALLOWED_HOSTS = ['home.shaqserver.com']
 #^ required if DEBUG is turned off
 
 
