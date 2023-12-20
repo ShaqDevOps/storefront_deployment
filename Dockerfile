@@ -69,15 +69,14 @@ RUN apk add --update --no-cache \
 COPY ./requirements.txt /requirements.txt
 RUN pip install --no-cache-dir -r /requirements.txt
 
-# Copy your Django project into the container at /app
+# Copy the entire Django project into /app in the container
+# Assuming your Django project is in the 'storefront' directory at the root of your build context
 COPY ./storefront /app
 
 # Set the working directory to /app
 WORKDIR /app
 
-# Create a user to run the Django app
 RUN adduser --disabled-password --no-create-home django
 USER django
 
-# Command to start uWSGI with your Django application
 CMD ["uwsgi", "--socket", ":8000", "--workers", "4", "--master", "--enable-threads", "--module", "storefront.wsgi"]
