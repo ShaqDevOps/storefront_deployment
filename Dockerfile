@@ -73,4 +73,4 @@ WORKDIR /app
 RUN adduser --disabled-password --no-create-home django
 USER django
 
-CMD ["uwsgi", "--socket", ":8000", "--workers", "4", "--master", "--enable-threads", "--module", "storefront.wsgi"]
+CMD ["uwsgi", "--socket", ":9000", "--workers", "4", "--master", "--enable-threads", "--module", "storefront.wsgi"]
