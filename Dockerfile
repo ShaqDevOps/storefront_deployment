@@ -7,11 +7,13 @@ RUN apk add --upgrade --no-cache build-base linux-headers && \
     pip install --upgrade pip && \
     pip install -r /requirements.txt
 
-COPY app/ /app
-WORKDIR /app
+# Assuming your manage.py is in the storefront directory and that's the root of your project
+COPY . /app
+WORKDIR /app/storefront
 
 RUN adduser --disabled-password --no-create-home django
 
 USER django
 
-CMD ["uwsgi", "--socket", ":9000", "--workers", "4", "--master", "--enable-threads", "--module", "app.wsgi"]
+# Update the module to match your project's WSGI application
+CMD ["uwsgi", "--socket", ":8000", "--workers", "4", "--master", "--enable-threads", "--module", "storefront.wsgi"]
