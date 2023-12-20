@@ -60,10 +60,10 @@ COPY requirements.txt /requirements.txt
 RUN pip install --upgrade pip && pip install -r /requirements.txt
 
 # Copy the entire storefront directory into /app in the container
-COPY ./storefront_development /app/storefront_directory
+COPY ./storefront_development /app/storefront_development
 
 # Set the working directory to /app
-WORKDIR /app/storefront_directory/storefront
+WORKDIR /app/storefront_development/storefront
 
 RUN adduser --disabled-password --no-create-home django
 USER django
