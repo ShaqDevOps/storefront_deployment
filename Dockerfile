@@ -25,7 +25,8 @@ ENV DJANGO_SETTINGS_MODULE="storefront.settings.dev"
 ENV PYTHONPATH /app
 
 
-RUN apk add --upgrade --no-cache build-base linux-headers libffi-dev openssl-dev mariadb-connector-c-dev
+RUN apk add --upgrade --no-cache build-base linux-headers libffi-dev openssl-dev mariadb-connector-c-dev pcre-dev
+
 
 COPY requirements.txt /requirements.txt
 RUN pip install --upgrade pip && pip install -r /requirements.txt
