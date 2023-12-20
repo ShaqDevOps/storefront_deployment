@@ -63,11 +63,11 @@ services:
   app:
     build: .
     restart: always
-    command: uwsgi --socket :8000 --workers 4 --master --enable-threads --module storefront.wsgi
+    command: uwsgi --socket :9000 --workers 4 --master --enable-threads --module storefront.wsgi
     # volumes:
     #   - ./storefront:/app  # Mapping the storefront directory into the container
     ports:
-      - "8000:8000"  # Expose the port that the Django app runs on
+      - "9000:9000"  # Expose the port that the Django app runs on
     env_file:
       - .env
     environment:
@@ -94,6 +94,8 @@ services:
       - proxy-dhparams:/vol/proxy
       - certbot-certs:/etc/letsencrypt
     environment:
+      - APP_HOST=app
+      - APP_PORT=9000
       - DOMAIN=${DOMAIN}
 
   certbot:
