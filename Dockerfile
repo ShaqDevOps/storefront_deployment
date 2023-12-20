@@ -62,7 +62,7 @@ COPY requirements.txt /requirements.txt
 RUN pip install --upgrade pip && pip install -r /requirements.txt
 
 # Copy the entire storefront directory into /app in the container
-COPY ./storefront /app
+COPY ./storefront/storefront /app
 
 # Set the working directory to /app
 WORKDIR /app
