@@ -26,11 +26,11 @@ services:
   app:
     build:
       context: .  # Assuming the Dockerfile is in the root of your project
-    command: sh -c "python manage.py runserver 0.0.0.0:9000"
+    command: sh -c "python manage.py runserver 0.0.0.0:8000"
     # volumes:
     #   - .:/app  # Mapping the entire project directory to /app in the container
     ports:
-      - "9000:9000"
+      - "8000:8000"
     environment:
       - DJANGO_SETTINGS_MODULE=storefront.dev  # Set the correct Django settings module
       - SECRET_KEY=${SECRET_KEY}  # Update the variable name to match the .env and Django settings
