@@ -52,31 +52,24 @@ FROM python:3.10-alpine3.16
 # Set environment variables
 ENV PYTHONUNBUFFERED 1
 ENV PYTHONPATH /app
-ENV DJANGO_SETTINGS_MODULE storefront.storefront.settings.dev  # Correct the path
+ENV DJANGO_SETTINGS_MODULE storefront.storefront.dev  # Corrected path
 
-# Install dependencies required for psycopg2, mysqlclient, etc.
-RUN apk add --update --no-cache \
-    build-base \
-    linux-headers \
-    libffi-dev \
-    openssl-dev \
-    mariadb-connector-c-dev \
-    pcre-dev \
-    mariadb-dev  # Add this if using MySQL
-    # Add any other dependencies you might need
+# Install dependencies
+RUN apk add --upgrade --no-cache build-base linux-headers libffi-dev openssl-dev mariadb-connector-c-dev pcre-dev
 
-# Copy requirements.txt and install Python dependencies
-COPY ./requirements.txt /requirements.txt
-RUN pip install --no-cache-dir -r /requirements.txt
+# Install Python dependencies
+COPY requirements.txt /requirements.txt
+RUN pip install --upgrade pip && pip install -r /requirements.txt
 
-# Copy the entire Django project into /app in the container
-# Assuming your Django project is in the 'storefront' directory at the root of your build context
+# Copy the entire storefront directory into /app in the container
 COPY ./storefront /app
 
 # Set the working directory to /app
 WORKDIR /app
 
+# Create a non-root user to run the Django app
 RUN adduser --disabled-password --no-create-home django
 USER django
 
+# Command to start uWSGI with your Django application
 CMD ["uwsgi", "--socket", ":8000", "--workers", "4", "--master", "--enable-threads", "--module", "storefront.wsgi"]
