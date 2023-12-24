@@ -4,29 +4,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Django App</title>
-    <link rel = "stylesheet" href ="{%static 'core/style.css'%}">
+    <title>MeowMart</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
 </head>
 <body>
     <header>
-        <nav>
-            <ul>
-                <li><a href="/">Home</a></li>
-                <!-- Add other navigation links here -->
-            </ul>
-        </nav>
+        <div class="header-content">
+            <img src="{% static 'meowmart-logo.jpg' %}" alt="MeowMart Logo" class="logo">
+            <nav>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <!-- Additional navigation links here -->
+                </ul>
+            </nav>
+        </div>
     </header>
     <main>
-        <h1>Welcome to My Django App</h1>
-        <p>This is the homepage of your application. Navigate using the menu to explore.</p>
-        <!-- <div class="home-page">
-            <img src = "{%static 'core/logo.jpg' %}" alt = "Logo" class= "logo">
-            
-            </div>
-             -->
+        <h1>Welcome to MeowMart</h1>
+        <p>Your one-stop shop for all things feline!</p>
+        <!-- Additional content here -->
     </main>
     <footer>
-        <p>© 2023 My Django App</p>
+        <p>© 2023 MeowMart</p>
     </footer>
 </body>
 </html>
