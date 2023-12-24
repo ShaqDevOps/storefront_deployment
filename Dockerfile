@@ -55,11 +55,11 @@ RUN adduser --disabled-password --no-create-home django
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
-# Collect static files
-RUN python manage.py collectstatic --noinput
-
 # Use the non-root user to run the app
 USER django
 
 # Set the entrypoint script
 ENTRYPOINT ["/entrypoint.sh"]
+
+# Collect static files
+RUN python manage.py collectstatic --noinput
