@@ -47,7 +47,6 @@
 #   proxy-dhparams:
 #   certbot-certs:
 
-
 version: "3.9"
 
 services:
@@ -76,7 +75,7 @@ services:
       - certbot-web:/vol/www
       - proxy-dhparams:/vol/proxy
       - certbot-certs:/etc/letsencrypt
-      - static-data:/vol/static  # Mount the same volume to serve static files
+      - static-data:/vol/static  # Mount for Nginx to serve static files
     environment:
       - DOMAIN=${DOMAIN}
 
