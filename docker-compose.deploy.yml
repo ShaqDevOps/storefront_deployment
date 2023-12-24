@@ -59,7 +59,7 @@ services:
     env_file:
       - .env
     environment:
-      - DJANGO_SETTINGS_MODULE=storefront.storefront.dev
+      - DJANGO_SETTINGS_MODULE=storefront.dev
     volumes:
       - static-data:/vol/static  # Mount for static files
 
