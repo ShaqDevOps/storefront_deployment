@@ -97,4 +97,4 @@ volumes:
   certbot-web:
   proxy-dhparams:
   certbot-certs:
-  static-data:  # Define the volume for static files
+  # static-data:  # Define the volume for static files
