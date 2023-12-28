@@ -44,8 +44,9 @@ header {
 
 .logo {
   margin-right: 20px; /* Adjust space between logo and nav */
+  width: 150px; /* Adjust width as needed */
+  height: auto; /* Maintain aspect ratio */
 }
-
 nav ul {
   list-style: none;
   padding: 0;
