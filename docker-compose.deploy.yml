@@ -61,7 +61,8 @@ services:
     environment:
       - DJANGO_SETTINGS_MODULE=storefront.dev
     volumes:
-      - static-data:/vol/static  # Mount for static files
+      - static-data:/app/staticfiles  # Assuming this is where Django collects static files
+
 
   proxy:
     build:
