@@ -42,11 +42,14 @@ header {
   justify-content: start;
 }
 
+
 .logo {
+  width: 100px; /* Adjust the width as necessary */
+  height: auto; /* This will maintain the aspect ratio */
   margin-right: 20px; /* Adjust space between logo and nav */
-  width: 150px; /* Adjust width as needed */
-  height: auto; /* Maintain aspect ratio */
 }
+
+
 nav ul {
   list-style: none;
   padding: 0;
