@@ -5,17 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MeowMart</title>
-    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link rel="stylesheet" href="{% static 'core/styles.css' %}">
 </head>
 <body>
     <header>
         <div class="header-content">
-            <img src="{% static 'logo.jpg' %}" alt="MeowMart Logo" class="logo">
+            <img src="{% static 'core/logo.jpg' %}" alt="MeowMart Logo" class="logo">
             <nav>
                 <ul>
                     <li><a href="/">Home</a></li>
                     <!-- Additional navigation links here -->
-                    <li><a href="{% url 'signin' %}">Sign In/Sign Up</a></li> <!-- Add this line for the button -->
+                    <li><a href="{% url 'signIn' %}">Sign In</a></li>
+                    <li><a href="{% url 'signUp' %}">Create Account</a></li> <!-- Add this line for the button -->
                 </ul>
             </nav>
         </div>
