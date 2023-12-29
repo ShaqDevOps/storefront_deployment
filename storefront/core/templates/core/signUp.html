@@ -2,9 +2,9 @@
 
 
 <!DOCTYPE html>
-<html lang="en">
+
+<!-- <html lang="en">
 <head>
-    <!-- Include meta tags, title, and CSS link -->
 </head>
 <body>
     <form id="signUpForm">
@@ -15,4 +15,12 @@
     </form>
     <script src="{% static 'core/auth.js' %}"></script>
 </body>
-</html>
+</html>  -->
+
+<!-- HTML structure -->
+<form method="post">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+    <button type="submit">Register</button>
+</form>
