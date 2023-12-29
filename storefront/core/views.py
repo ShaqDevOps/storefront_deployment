@@ -1,54 +1,51 @@
+from rest_framework.viewsets import GenericViewSet
+from rest_framework.decorators import action
+from rest_framework.response import Response
 from django.shortcuts import render
-from djoser.views import *
-from rest_framework import generics
-from rest_framework.viewsets import GenericViewSet, ModelViewSet
-from rest_framework.mixins import CreateModelMixin
-from core.serializers import UserCreateSerializer, UserSerializer
-from django.shortcuts import render, redirect
-from rest_framework.viewsets import ModelViewSet
+from .forms import CustomUserCreationForm
 from django.contrib.auth import get_user_model
-from .serializers import CustomUserCreationSerializer
-
-# from django.views.generic import TemplateView
-
-# class CustomUserCreateView(GenericViewSet,CreateModelMixin):
-#     serializer_class = UserCreateSerializer
-
-
-
-# class UserProfileView(TemplateView):
-#     # serializer_class = UserSerializer
-#     template_name = 'core/profile.html'
-
-#     def get_object(self):
-#         return self.request.user  # Retrieve the currently authenticated user
-
-# class SignUpView(ModelViewSet):
-#     def 
-#         if request.method == 'POST':
-#             form = CustomUserCreationForm(request.POST)
-#             if form.is_valid():
-#                 form.save()
-#                 # After saving, you can redirect the user or perform other actions
-#                 print(form)
-#                 return redirect('/')
-#         else:
-#             form = CustomUserCreationForm()
-
-#         return render(request, 'core/signUp.html', {'form': form})
-
-
-
+from .serializers import *
 
 User = get_user_model()
 
 class SignUpViewSet(GenericViewSet):
     queryset = User.objects.all()
-    serializer_class = CustomUserCreationSerializer
-    
-    def PostForm(self):
-        if self.request.method == 'POST':
-            print(CustomUserCreationSerializer.data)
+    serializer_class = UserCreateSerializer
+
+    @action(detail=False, methods=['get', 'post'])
+    def render_form(self, request):
+        if request.method == 'POST':
+            form = CustomUserCreationForm(request.data)
+            if form.is_valid():
+                form.save()
+                # Redirect or perform other actions after saving
+                return Response({'status': 'User created'})
+        else:
+            form = CustomUserCreationForm()
+
+        # Use Django's render function to render the form template
+        return (render(request, 'core/signUp.html', {'form': form}))
+
+
+
+
+
+# User = get_user_model()
+
+# class SignUpViewSet(GenericViewSet):
+#     queryset = User.objects.all()
+#     serializer_class = CustomUserCreationSerializer
+#     def GetRenderedForm(self, request):
+#         form = CustomUserCreationForm
+#         if self.request.method == 'GET':
+#           return render(request, {form :'form'}, 'core/signUp.html')
+
+
+
+#     # def PostForm(self):
+
+    #     if self.request.method == 'POST':
+    #          print(<object from the form>)
 
 
 def signInView(request):
