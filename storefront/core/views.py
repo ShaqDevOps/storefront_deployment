@@ -45,10 +45,10 @@ User = get_user_model()
 class SignUpViewSet(GenericViewSet):
     queryset = User.objects.all()
     serializer_class = CustomUserCreationSerializer
-    def get(self):
-        if self.request.method == 'GET':
-            
-            print(serializer.data)
+    
+    def PostForm(self):
+        if self.request.method == 'POST':
+            print(CustomUserCreationSerializer.data)
 
 
 def signInView(request):
