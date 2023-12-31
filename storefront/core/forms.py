@@ -20,3 +20,8 @@ class UserDetailForm(forms.Form):
     last_name = forms.CharField(max_length=150, required=False)
 
     # Include any additional fields or validation as required
+
+
+# class UserSignIn(forms.Form):
+#     username = forms.CharField(max_length=150, disabled=True)
+#     password = forms.CharField(max_length=)
