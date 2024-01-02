@@ -1,36 +1,36 @@
-/* signup.css */
+/* SignUp.css */
 body, html {
-    height: 100%; /* Make sure the html and body cover full height */
+    height: 100%;
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    background-color: #121212; /* Dark background */
-    color: #ffffff; /* Light text */
+    background-color: #121212;
+    color: #ffffff;
     display: flex;
-    flex-direction: column; /* Stack elements vertically */
+    flex-direction: column;
 }
 
 header {
-    width: 100%; /* Header should span the full width */
+    width: 100%;
     background: #333;
     color: #fff;
     padding: 1rem 0;
     text-align: center;
-    position: fixed; /* Fixed position */
-    top: 0; /* Stick to the top */
-    left: 0; /* Stick to the left side */
-    z-index: 1000; /* Ensure it's above other items */
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
 }
 
 .header-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 5%; /* Responsive padding */
+    padding: 0 5%;
 }
 
 .logo {
-    width: 50px; /* Adjust logo size for mobile */
+    width: 50px;
     height: auto;
 }
 
@@ -42,7 +42,7 @@ nav ul {
 }
 
 nav ul li {
-    margin: 0 10px; /* Less margin for mobile */
+    margin: 0 10px;
 }
 
 nav ul li a {
@@ -56,18 +56,18 @@ nav ul li a:hover {
 }
 
 main {
-    flex-grow: 1; /* Allow main content to grow and fill available space */
+    flex-grow: 1;
     display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-    padding-top: 60px; /* Add padding to account for fixed header */
-    padding-bottom: 60px; /* Add padding to account for fixed footer */
+    justify-content: center;
+    align-items: center;
+    padding-top: 60px;
+    padding-bottom: 60px;
 }
 
 .registration-container {
-    width: 50%; /* Set the width to 50% of the viewport width */
-    max-width: 400px; /* Maximum width */
-    margin: auto; /* Center the form horizontally */
+    width: 50%;
+    max-width: 400px;
+    margin: auto;
     padding: 20px;
     background: #1c1c1c;
     border-radius: 5px;
@@ -80,11 +80,19 @@ form {
     align-items: stretch;
 }
 
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    color: #76c893;
+    margin-bottom: 5px;
+}
+
 input[type="text"],
 input[type="email"],
 input[type="password"] {
     padding: 10px;
-    margin: 10px 0;
     background: #262626;
     border: 1px solid #333;
     color: #fff;
@@ -93,7 +101,7 @@ input[type="password"] {
 
 button[type="submit"] {
     padding: 10px;
-    margin-top: 10px; /* Add space above the button */
+    margin-top: 10px;
     background: #76c893;
     color: #fff;
     border: none;
@@ -110,28 +118,28 @@ footer {
     color: #fff;
     text-align: center;
     padding: 10px 0;
-    position: fixed; /* Fixed position */
-    bottom: 0; /* Stick to the bottom */
-    left: 0; /* Stick to the left side */
-    width: 100%; /* Footer should span the full width */
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
 }
 
 /* Media query for tablets and larger screens */
 @media (min-width: 768px) {
     .logo {
-        width: 100px; /* Larger logo for larger screens */
+        width: 100px;
     }
 
     nav ul li {
-        margin: 0 20px; /* More margin for larger screens */
+        margin: 0 20px;
     }
 
     .header-content {
-        padding: 0 10%; /* More padding for larger screens */
+        padding: 0 10%;
     }
 
     .registration-container {
-        width: 50%; /* Adjust the width for larger screens */
-        max-width: 500px; /* Maximum width */
+        width: 50%;
+        max-width: 500px;
     }
 }

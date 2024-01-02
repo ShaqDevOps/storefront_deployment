@@ -1,4 +1,3 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,27 +8,44 @@
 </head>
 <body>
     <header>
-        <div class="header-content">
-            <img src="{% static 'core/logo.jpg' %}" alt="MeowMart Logo" class="logo">
-            <nav>
-                <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="{% url 'SignIn' %}">Sign In</a></li>
-                    <li><a href="{% url 'SignUp-SignUpForm' %}" class="active">Create Account</a></li>
-                </ul>
-            </nav>
-        </div>
+        <!-- Header content here -->
     </header>
     <main>
         <div class="registration-container">
             <h1>Sign Up</h1>
             <form method="post" class="registration-form">
                 {% csrf_token %}
-                {{ form.as_p }}
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required placeholder="Enter your username">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label for="first_name">First name:</label>
+                    <input type="text" id="first_name" name="first_name" placeholder="Enter your first name">
+                </div>
+                <div class="form-group">
+                    <label for="last_name">Last name:</label>
+                    <input type="text" id="last_name" name="last_name" placeholder="Enter your last name">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required placeholder="Enter a strong password">
+                </div>
+                <div class="form-group">
+                    <label for="password_confirmation">Password confirmation:</label>
+                    <input type="password" id="password_confirmation" name="password_confirmation" required placeholder="Re-enter your password">
+                </div>
                 <button type="submit">Create Account</button>
+                <!-- Error messages for validation can be displayed here if needed -->
             </form>
         </div>
     </main>
     <footer>
-        <p>© 2023 MeowMart</p>
+        <!-- Footer content here -->
     </footer>
+</body>
+</html>
