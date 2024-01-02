@@ -65,9 +65,10 @@ main {
 }
 
 .registration-container {
-    width: 90vw; /* 90% of viewport width */
+    width: 50%; /* Set the width to 50% of the viewport width */
     max-width: 400px; /* Maximum width */
-    padding: 5vh 2vw; /* Vertical padding in vh, horizontal padding in vw */
+    margin: auto; /* Center the form horizontally */
+    padding: 20px;
     background: #1c1c1c;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
