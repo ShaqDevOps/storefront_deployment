@@ -1,4 +1,3 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +8,16 @@
 </head>
 <body>
     <header>
-        <!-- Header content here -->
+        <div class="header-content">
+            <img src="{% static 'core/logo.jpg' %}" alt="MeowMart Logo" class="logo">
+            <nav>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="{% url 'SignIn' %}">Sign In</a></li>
+                    <li><a href="{% url 'SignUp-SignUpForm' %}" class="active">Create Account</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
     <main>
         <div class="registration-container">
@@ -41,12 +49,11 @@
                     <input type="password" id="password_confirmation" name="password_confirmation" required placeholder="Re-enter your password">
                 </div>
                 <button type="submit">Create Account</button>
-                <!-- Error messages for validation can be displayed here if needed -->
             </form>
         </div>
     </main>
     <footer>
-        <!-- Footer content here -->
+        <p>© 2023 MeowMart</p>
     </footer>
 </body>
 </html>
