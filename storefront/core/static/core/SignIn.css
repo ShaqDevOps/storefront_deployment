@@ -73,15 +73,16 @@ nav ul li a:hover {
 }
 
 #signInForm button {
-    width: calc(100% - 20px); /* adjusted width with padding in mind */
-    max-width: 300px; /* new max-width for a better aesthetic */
-    margin: 10px auto; /* centering the input fields */
+    width: calc(100% - 20px); /* Adjusted width with padding in mind */
+    max-width: 300px; /* New max-width for a better aesthetic */
+    margin: 10px auto; /* Centering the button */
     padding: 10px;
     background-color: #76c893; /* Button color */
     color: #fff;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    display: block; /* Ensure button is treated as a block element */
 }
 
 #signInForm button:hover {
