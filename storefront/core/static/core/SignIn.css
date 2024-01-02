@@ -59,16 +59,17 @@ nav ul li a:hover {
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-
 #signInForm input[type="text"],
 #signInForm input[type="password"] {
-    width: 100%;
+    width: calc(100% - 20px); /* adjusted width with padding in mind */
+    max-width: 300px; /* new max-width for a better aesthetic */
+    margin: 10px auto; /* centering the input fields */
     padding: 10px;
-    margin-bottom: 10px;
     border: 1px solid #333;
     background: #262626; /* Dark input fields */
     color: #fff;
     border-radius: 4px;
+    display: block; /* ensure inputs are treated as block elements */
 }
 
 #signInForm button {
