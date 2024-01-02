@@ -1,0 +1,12 @@
+{% load rest_framework %}
+
+<form method="post" class="registration-form">
+    {% csrf_token %}
+    {{ form.username.label_tag }} {{ form.username }}
+    {{ form.email.label_tag }} {{ form.email }}
+    {{ form.first_name.label_tag }} {{ form.first_name }}
+    {{ form.last_name.label_tag }} {{ form.last_name }}
+    {{ form.password.label_tag }} {{ form.password }}
+    {{ form.password_confirmation.label_tag }} {{ form.password_confirmation }}
+    <button type="submit">Create Account</button>
+</form>
