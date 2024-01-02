@@ -31,20 +31,32 @@ class SignUpViewSet(ModelViewSet):
             return [IsAdminUser()]
         
   
-
     @action(detail=False, methods=['get', 'post'])
     def SignUpForm(self, request):
         if request.method == 'POST':
-            form = CustomUserCreationForm(request.data)
-            if form.is_valid():
-                form.save()
+            serializer = CustomUserCreationSerializer(data=request.data)
+            if serializer.is_valid():
+                user = serializer.save()
                 # Redirect or perform other actions after saving
                 return redirect('/')
         else:
-            form = CustomUserCreationForm()
+            serializer = CustomUserCreationSerializer()
 
-        # Use Django's render function to render the form template
-        return (render(request, 'core/SignUp.html', {'form': form}))
+        return render(request, 'core/SignUp.html', {'serializer': serializer})
+    
+    # @action(detail=False, methods=['get', 'post'])
+    # def SignUpForm(self, request):
+    #     if request.method == 'POST':
+    #         form = CustomUserCreationForm(request.data)
+    #         if form.is_valid():
+    #             form.save()
+    #             # Redirect or perform other actions after saving
+    #             return redirect('/')
+    #     else:
+    #         form = CustomUserCreationForm()
+
+    #     # Use Django's render function to render the form template
+    #     return (render(request, 'core/SignUp.html', {'form': form}))
     
 #HOW TO USE TEMPLATES WITH REST_FRAMEWORK
         """
