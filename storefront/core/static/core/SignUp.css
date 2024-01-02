@@ -1,60 +1,62 @@
-/* registration.css */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-}
 
-.registration-container {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+/* Add header and footer styles from your homepage and sign-in page */
+header {
+    background: #333;
+    color: #fff;
+    padding: 1rem 0;
     text-align: center;
 }
 
-h1 {
-    margin-bottom: 20px;
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: start;
 }
 
-/* Style form fields */
-form p {
-    margin: 10px 0;
+nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    align-items: center;
 }
 
-input[type="text"],
-input[type="email"],
-input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+nav ul li {
+    margin-right: 20px;
 }
 
-/* Style the submit button */
-button[type="submit"] {
-    background-color: #007BFF;
+nav ul li a {
+    text-decoration: none;
     color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
 }
 
-button[type="submit"]:hover {
-    background-color: #0056b3;
+nav ul li a.active {
+    border-bottom: 2px solid #fff;
 }
 
+footer {
+    text-align: center;
+    padding: 10px 0;
+    background: #333;
+    color: #fff;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
 
-.logo {
-    width: 100px; /* Adjust the width as necessary */
-    height: auto; /* This will maintain the aspect ratio */
-    margin-right: 20px; /* Adjust space between logo and nav */
-    filter: none !important; /* Remove any filter effects applied to the logo */
-  }
-  
+/* Since the footer is set to absolute, it may overlap content on smaller screens. */
+/* To prevent this, add padding to the bottom of the main element */
+main {
+    padding-bottom: 60px; /* Height of the footer */
+}
+
+/* Styles specific to the registration form */
+.registration-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+}
+
+.registration-form p {
+    text-align: left;
+}

@@ -1,22 +1,35 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration</title>
+    <title>Registration - MeowMart</title>
     <link rel="stylesheet" href="{% static 'core/SignUp.css' %}">
 </head>
 <body>
-    <div class="registration-container">
-        <img src="{% static 'core/logo.jpg' %}" alt="Logo" class="logo">
-        <h1>Sign Up</h1>
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Create Account</button>
-        </form>
-    </div>
-</body>
-</html>
+    <header>
+        <div class="header-content">
+            <img src="{% static 'core/logo.jpg' %}" alt="MeowMart Logo" class="logo">
+            <nav>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="{% url 'SignIn' %}">Sign In</a></li>
+                    <li><a href="{% url 'SignUp-SignUpForm' %}" class="active">Create Account</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <div class="registration-container">
+            <h1>Sign Up</h1>
+            <form method="post" class="registration-form">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Create Account</button>
+            </form>
+        </div>
+    </main>
+    <footer>
+        <p>© 2023 MeowMart</p>
+    </footer>
