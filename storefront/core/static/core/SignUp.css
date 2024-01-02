@@ -26,11 +26,11 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 10%;
+    padding: 0 5%; /* Responsive padding */
 }
 
 .logo {
-    width: 100px;
+    width: 50px; /* Adjust logo size for mobile */
     height: auto;
 }
 
@@ -42,7 +42,7 @@ nav ul {
 }
 
 nav ul li {
-    margin: 0 20px;
+    margin: 0 10px; /* Less margin for mobile */
 }
 
 nav ul li a {
@@ -65,8 +65,8 @@ main {
 }
 
 .registration-container {
-    width: 400px; /* Fixed width for the form container */
-    margin: auto; /* Center in the available space */
+    width: 90%; /* Responsive width */
+    max-width: 400px; /* Maximum width */
     padding: 20px;
     background: #1c1c1c;
     border-radius: 5px;
@@ -113,4 +113,24 @@ footer {
     bottom: 0; /* Stick to the bottom */
     left: 0; /* Stick to the left side */
     width: 100%; /* Footer should span the full width */
+}
+
+/* Media query for tablets and larger screens */
+@media (min-width: 768px) {
+    .logo {
+        width: 100px; /* Larger logo for larger screens */
+    }
+
+    nav ul li {
+        margin: 0 20px; /* More margin for larger screens */
+    }
+
+    .header-content {
+        padding: 0 10%; /* More padding for larger screens */
+    }
+
+    .registration-container {
+        width: 50%; /* Adjust the width for larger screens */
+        max-width: 500px; /* Maximum width */
+    }
 }
