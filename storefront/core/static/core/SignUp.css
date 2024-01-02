@@ -49,3 +49,12 @@ button[type="submit"] {
 button[type="submit"]:hover {
     background-color: #0056b3;
 }
+
+
+.logo {
+    width: 100px; /* Adjust the width as necessary */
+    height: auto; /* This will maintain the aspect ratio */
+    margin-right: 20px; /* Adjust space between logo and nav */
+    filter: none !important; /* Remove any filter effects applied to the logo */
+  }
+  
