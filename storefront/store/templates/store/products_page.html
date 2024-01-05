@@ -11,16 +11,16 @@
     <header>
         <div class="header-content">
             <img src="{% static 'logo.jpg' %}" alt="MeowMart Logo" class="logo">
-            <!-- ... -->
+
             <nav>
                 <ul>
-                    <li><a href="{% static 'core/Index.html' %}">Home</a></li> <!-- Corrected URL name -->
+                    <li><a href="{% url 'core: ' %}">Home</a></li>
                     <li><a href="{% url 'store:products_page' %}">Products</a></li>
                     <li><a href="{% url 'core:SignIn' %}">Sign In</a></li>
                     <li><a href="{% url 'core:SignUp-SignUpForm' %}">Create Account</a></li>
                 </ul>
             </nav>
-            <!-- ... -->
+        
 
         </div>
 
