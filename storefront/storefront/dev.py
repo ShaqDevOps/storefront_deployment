@@ -12,8 +12,8 @@ DEBUG = True
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY')
 ALLOWED_HOSTS = [
-    # 'shaqserver.com',
-    '127.0.0.1',
+    'shaqserver.com',
+    # '127.0.0.1',
 ]
 #^ required if DEBUG is turned off
 
