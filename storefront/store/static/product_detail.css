@@ -1,0 +1,58 @@
+/* product_detail.css */
+@import 'core/static/Index.css'; /* Importing styles from homepage.css */
+
+/* Additional styles specific to the product_detail page */
+.product-gallery {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.primary-image {
+    max-width: 100%; /* Ensures image is not larger than its container */
+    height: auto; /* Keeps image aspect ratio intact */
+    margin-bottom: 10px; /* Adds some space below the primary image */
+}
+
+.thumbnails {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap; /* Allows thumbnails to wrap on smaller screens */
+}
+
+.thumbnail-image {
+    width: 100px; /* Adjust the width as needed */
+    height: auto; /* Keeps image aspect ratio intact */
+    cursor: pointer;
+}
+
+.product-info {
+    background-color: #ffffff; /* Light background for the product info */
+    color: #121212; /* Dark text color */
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 5px; /* Optional: adds rounded corners */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Optional: adds a subtle shadow */
+}
+
+/* Ensures the footer is always at the bottom */
+body, html {
+    height: 100%;
+}
+
+footer {
+    position: relative; /* Adjusted from absolute to relative */
+    bottom: 0;
+}
+
+/* You may need to adjust the following if you want to make the header fixed */
+header {
+    position: static; /* Changed from fixed to static */
+}
+
+/* Ensure the main content is not hidden behind a fixed header */
+main {
+    padding-top: 70px; /* Adjust the value based on your header's height */
+}

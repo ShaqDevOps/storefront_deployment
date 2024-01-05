@@ -6,6 +6,8 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from . import views
 from rest_framework.routers import DefaultRouter
 
+app_name = 'core'
+
 router = DefaultRouter()
 router.register('SignUp', views.SignUpViewSet, basename='SignUp')
 

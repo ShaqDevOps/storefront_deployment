@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ product.title }} - MeowMart</title>
+    <link href="{% static 'product_detail.css' %}" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <img src="{% static 'logo.jpg' %}" alt="MeowMart Logo" class="logo">
+            <!-- ... -->
+            <nav>
+                <ul>
+                    <li><a href="{% static 'core/Index.html' %}">Home</a></li> <!-- Corrected URL name -->
+                    <li><a href="{% url 'store:products_page' %}">Products</a></li>
+                    <li><a href="{% url 'core:SignIn' %}">Sign In</a></li>
+                    <li><a href="{% url 'core:SignUp-SignUpForm' %}">Create Account</a></li>
+                </ul>
+            </nav>
+            <!-- ... -->
+
+        </div>
+    </header>
+    
+    <main>
+        <div class="product-gallery">
+            <img src="{{ product.images.first.image.url }}" alt="{{ product.title }}" class="primary-image">
+            <!-- Thumbnails for additional images -->
+            <div class="thumbnails">
+                {% for image in product.images.all %}
+                    <img src="{{ image.image.url }}" alt="{{ product.title }}" class="thumbnail-image">
+                {% endfor %}
+            </div>
+        </div>
+        <div class="product-info">
+            <h1>{{ product.title }}</h1>
+            <p>{{ product.description }}</p>
+            <p>Price: ${{ product.unit_price }}</p>
+            <!-- Add to cart form or button -->
+            <!-- Any other details or related products -->
+        </div>
+    </main>
+    
+    <footer>
+        <!-- ... same as your homepage footer ... -->
+    </footer>
+</body>
+</html>

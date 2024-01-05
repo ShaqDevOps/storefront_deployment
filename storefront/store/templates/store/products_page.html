@@ -8,23 +8,40 @@
     <link rel="stylesheet" href="{% static 'product_page.css' %}">
 </head>
 <body>
+    <header>
+        <div class="header-content">
+            <img src="{% static 'logo.jpg' %}" alt="MeowMart Logo" class="logo">
+            <!-- ... -->
+            <nav>
+                <ul>
+                    <li><a href="{% static 'core/Index.html' %}">Home</a></li> <!-- Corrected URL name -->
+                    <li><a href="{% url 'store:products_page' %}">Products</a></li>
+                    <li><a href="{% url 'core:SignIn' %}">Sign In</a></li>
+                    <li><a href="{% url 'core:SignUp-SignUpForm' %}">Create Account</a></li>
+                </ul>
+            </nav>
+            <!-- ... -->
+
+        </div>
+
+    </header>
     <h1>All Products</h1>
     <div class="product-grid">
         {% for product in products %}
         <div class="product-item">
-            <!-- If there are multiple images, this will display the first one -->
-            {% if product.images %}
-            <img src="{{ product.images.first.image.url }}" alt="{{ product.title }}">
-            {% endif %}
-            <div class="product-info">
+            <a href="{% url 'store:products-detail' pk=product.id %}">
+                {% if product.images.first %}
+                    <img src="{{ product.images.first.image.url }}" alt="{{ product.title }}">
+                {% endif %}
                 <h3>{{ product.title }}</h3>
-                <p class="price">From ${{ product.unit_price }} USD</p>
-                <!-- Other product details and actions -->
-            </div>
+            </a>
+            <p class="price">From ${{ product.unit_price }} USD</p>
+            <!-- Other product details and actions -->
         </div>
     {% empty %}
         <p>No products available.</p>
     {% endfor %}
+    
     </div>
 </body>
 </html>

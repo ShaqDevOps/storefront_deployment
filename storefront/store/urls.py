@@ -34,5 +34,5 @@ carts_router.register('items', views.CartItemViewSet, basename='cart-items')
 urlpatterns = router.urls + products_router.urls + carts_router.urls
 
 urlpatterns += [
-    path('products/products_page/', views.ProductViewSet.as_view({'get': 'store/products_page'}), name='products_page'),
+    path('products/products_page/', views.ProductViewSet.as_view({'get': 'products_page'}), name='products_page'),
 ]

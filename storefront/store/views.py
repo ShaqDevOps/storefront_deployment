@@ -28,7 +28,8 @@ class ProductViewSet(ModelViewSet, generics.RetrieveAPIView):
     permission_classes = [IsAdminOrReadOnly]
     search_fields = ['title', 'description']
     ordering_fields = ['unit_price', 'last_update']
-
+    renderer_classes=[TemplateHTMLRenderer]
+                    #^used to render customer templates 
     def get_serializer_context(self):
         return {'request': self.request}
 
@@ -38,12 +39,20 @@ class ProductViewSet(ModelViewSet, generics.RetrieveAPIView):
 
         return super().destroy(request, *args, **kwargs)
     
-    @action(detail=False, methods=['get'], renderer_classes=[TemplateHTMLRenderer])
+    @action(detail=False, methods=['get'])
     def products_page(self, request):
         # Get your data - for example, all products
         products = self.get_queryset()
         return Response({'products': products}, template_name='store/products_page.html')
     
+    # @action(detail=True, renderer_classes=[TemplateHTMLRenderer])
+    # def detail(self, request, *args, **kwargs):
+    #     product = self.get_object()
+    #     return Response({'product': product}, template_name='store/product_detail.html')
+
+    def retrieve(self, request, *args, **kwargs):
+        product = self.get_object()
+        return Response({'product': product}, template_name='store/product_detail.html')
     
 
 class ProductImageViewSet(ModelViewSet):
