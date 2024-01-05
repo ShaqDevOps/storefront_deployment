@@ -8,7 +8,9 @@ from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.mixins import CreateModelMixin, DestroyModelMixin, RetrieveModelMixin, UpdateModelMixin
 from rest_framework.permissions import AllowAny, DjangoModelPermissions, DjangoModelPermissionsOrAnonReadOnly, IsAdminUser, IsAuthenticated
 from rest_framework.response import Response
+from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.viewsets import ModelViewSet, GenericViewSet
+from rest_framework import generics
 from rest_framework import status
 from .filters import ProductFilter
 from .models import *
@@ -17,7 +19,7 @@ from .serializers import *
 
 
 
-class ProductViewSet(ModelViewSet):
+class ProductViewSet(ModelViewSet, generics.RetrieveAPIView):
     queryset = Product.objects.prefetch_related('images').all()
     serializer_class = ProductSerializer
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
@@ -35,8 +37,14 @@ class ProductViewSet(ModelViewSet):
             return Response({'error': 'Product cannot be deleted because it is associated with an order item.'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
         return super().destroy(request, *args, **kwargs)
-
-
+    
+    @action(detail=False, methods=['get'], renderer_classes=[TemplateHTMLRenderer])
+    def products_page(self, request):
+        # Get your data - for example, all products
+        products = self.get_queryset()
+        return Response({'products': products}, template_name='store/products_page.html')
+    
+    
 
 class ProductImageViewSet(ModelViewSet):
     serializer_class = ProductImageSerializer
