@@ -1,5 +1,5 @@
 /* product_detail.css */
-@import 'core/static/Index.css'; /* Importing styles from homepage.css */
+@import 'core/Index.css'; /* Importing styles from homepage.css */
 
 /* Additional styles specific to the product_detail page */
 .product-gallery {

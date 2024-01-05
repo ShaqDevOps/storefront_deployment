@@ -24,7 +24,7 @@ admin.site.site_header = 'Storefront Admin'
 admin.site.index_title = 'Admin'
 
 urlpatterns = [
-    path('', include('core.urls')),
+    path('', include(('core.urls', 'core'), namespace='core')),
     path('admin/', admin.site.urls),
     path('playground/', include('playground.urls')),
     path('store/', include(('store.urls', 'store'), namespace='store')),

@@ -3,8 +3,6 @@ from django.urls.conf import include
 from rest_framework_nested import routers
 from . import views
 
-# store/urls.py
-
 app_name = 'store'
 
 

@@ -15,8 +15,8 @@ router.register('SignUp', views.SignUpViewSet, basename='SignUp')
 
 # URLConf
 urlpatterns = [
-    path('', TemplateView.as_view(template_name = 'core/index.html')),
-     path('SignIn/', views.SignInView, name='SignIn'),
+    path('', TemplateView.as_view(template_name='core/index.html'), name='Home'),
+    path('SignIn/', views.SignInView, name='SignIn'),
     # path('signUp/', views.SignUpViewSet, name='signUp'),
     #  path('profile/', views.UserProfileView.as_view(), name='user-profile'),
     # path('register/', views.CustomUserCreateView.as_view({'post': 'create'}), name='user-registration'),
