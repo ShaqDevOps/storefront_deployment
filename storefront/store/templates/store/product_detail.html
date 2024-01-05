@@ -11,7 +11,6 @@
     <header>
         <div class="header-content">
             <img src="{% static 'logo.jpg' %}" alt="MeowMart Logo" class="logo">
-            <!-- ... -->
             <nav>
                 <ul>
                     <li><a href="{% url 'core:Home' %}">Home</a></li>
@@ -20,18 +19,15 @@
                     <li><a href="{% url 'core:SignUp-SignUpForm' %}">Create Account</a></li>
                 </ul>
             </nav>
-            <!-- ... -->
-
         </div>
     </header>
     
     <main>
         <div class="product-gallery">
-            <img src="{{ product.images.first.image.url }}" alt="{{ product.title }}" class="primary-image">
-            <!-- Thumbnails for additional images -->
+            <img id="primary-image" src="{{ product.images.first.image.url }}" alt="{{ product.title }}" class="primary-image">
             <div class="thumbnails">
                 {% for image in product.images.all %}
-                    <img src="{{ image.image.url }}" alt="{{ product.title }}" class="thumbnail-image">
+                    <img src="{{ image.image.url }}" alt="{{ product.title }}" class="thumbnail-image" onclick="updatePrimaryImage(this)">
                 {% endfor %}
             </div>
         </div>
@@ -47,5 +43,14 @@
     <footer>
         <!-- ... same as your homepage footer ... -->
     </footer>
+
+    <script>
+        function updatePrimaryImage(thumbnail) {
+            var primaryImage = document.getElementById('primary-image');
+            primaryImage.src = thumbnail.src;
+            // No class change needed for the primary image size
+        }
+        </script>
+        
 </body>
 </html>
