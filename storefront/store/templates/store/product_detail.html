@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ product.title }} - MeowMart</title>
     <link href="{% static 'product_detail.css' %}" rel="stylesheet">
+    <link href="{% static 'product_detail_cart.css' %}" rel="stylesheet">
+
+
 </head>
 <body>
     <header>
@@ -19,6 +22,16 @@
                     <li><a href="{% url 'core:SignUp-SignUpForm' %}">Create Account</a></li>
                 </ul>
             </nav>
+            <div class="cart-summary" onclick="toggleCart()">
+                <span id="cart-count">0</span> Items
+                <!-- You can use an icon here instead of text -->
+            </div>
+        </div>
+        <!-- Cart dropdown that will be toggled -->
+        <div id="cart-dropdown" class="cart-dropdown">
+            <ul id="cart-items-list">
+                <!-- Cart items will be dynamically inserted here -->
+            </ul>
         </div>
     </header>
     
@@ -35,7 +48,9 @@
             <h1>{{ product.title }}</h1>
             <p>{{ product.description }}</p>
             <p>Price: ${{ product.unit_price }}</p>
-            <!-- Add to cart form or button -->
+
+            <button type="button" onclick="addToCart('{{ product.id }}', 1)">Add to Cart</button>
+
             <!-- Any other details or related products -->
         </div>
     </main>
@@ -51,6 +66,7 @@
             // No class change needed for the primary image size
         }
         </script>
-        
+        <script src="{% static 'CartFunctions.js' %}"></script> 
+
 </body>
 </html>

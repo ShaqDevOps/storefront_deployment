@@ -1,0 +1,34 @@
+/* Position your cart summary at the top right of the header */
+.cart-summary {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+    /* Add more styles as needed */
+}
+
+/* Initially hide your cart dropdown */
+.cart-dropdown {
+    display: none;
+    position: absolute;
+    right: 10px;
+    top: 40px; /* Adjust based on the size of your header */
+    background-color: white;
+    width: 300px; /* Or as required */
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,.2);
+    z-index: 1000; /* Make sure it's above other content */
+}
+
+/* Style for individual cart items */
+.cart-dropdown ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.cart-dropdown li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}

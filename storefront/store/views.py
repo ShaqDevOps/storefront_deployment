@@ -45,11 +45,6 @@ class ProductViewSet(ModelViewSet, generics.RetrieveAPIView):
         products = self.get_queryset()
         return Response({'products': products}, template_name='store/products_page.html')
     
-    # @action(detail=True, renderer_classes=[TemplateHTMLRenderer])
-    # def detail(self, request, *args, **kwargs):
-    #     product = self.get_object()
-    #     return Response({'product': product}, template_name='store/product_detail.html')
-
     def retrieve(self, request, *args, **kwargs):
         product = self.get_object()
         return Response({'product': product}, template_name='store/product_detail.html')
