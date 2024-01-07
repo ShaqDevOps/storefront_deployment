@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,20 +8,23 @@
     <link href="{% static 'product_detail.css' %}" rel="stylesheet">
     <link href="{% static 'cart.css' %}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-    <script>
-      if (window.innerWidth <= 768) {
-        var link = document.createElement('link');
-        link.rel = 'stylesheet';
-        link.href = 'https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css';
-        document.head.appendChild(link);
-      }
-    </script>
+
 </head>
-<body class="bg-gray-50"> <!-- Tailwind class for background color -->
-    <header class="bg-gray-800 text-white"> <!-- Tailwind classes for background and text color -->
-        <div class="header-content flex justify-between items-center p-4"> <!-- Tailwind classes for layout -->
-            <img src="{% static 'logo.jpg' %}" alt="MeowMart Logo" class="logo w-24 h-auto"> <!-- Tailwind classes for width and height -->
-            <span id="cart-count" class="cart-quantity">0</span> <!-- Items text removed since you want the number inside the circle -->
+<body>
+    <header>
+        <div class="header-content">
+            <img src="{% static 'logo.jpg' %}" alt="MeowMart Logo" class="logo">
+            <nav>
+                <ul>
+                    <li><a href="{% url 'core:Home' %}">Home</a></li>
+                    <li><a href="{% url 'store:products_page' %}">Products</a></li>
+                    <li><a href="{% url 'core:SignIn' %}">Sign In</a></li>
+                    <li><a href="{% url 'core:SignUp-SignUpForm' %}">Create Account</a></li>
+                </ul>
+            </nav>
+            <div class="cart-summary" onclick="toggleCart()">
+                <img src="{% static 'cat_cart.jpg' %}" alt="Cart" class="cart-icon">
+                <span id="cart-count" class="cart-quantity">0</span> <!-- Items text removed since you want the number inside the circle -->
             </div>
             
         </div>
@@ -31,19 +35,18 @@
         </div>
     </header>
 
-    <main class="product-detail-main max-w-screen-lg mx-auto p-4"> <!-- Tailwind classes for max width, auto margins, and padding -->
-        <div class="product-content flex flex-col lg:flex-row gap-4"> <!-- Tailwind classes for flex layout with conditional row layout on large screens -->
-            <div class="product-gallery w-full lg:w-1/2"> <!-- Tailwind classes for full width and half width on large screens -->
-                <img id="primary-image" src="{{ product.images.first.image.url }}" alt="{{ product.title }}" class="primary-image w-full h-auto object-cover">
+    <main class="product-detail-main">
+        <div class="product-content">
+            <div class="product-gallery">
+                <img id="primary-image" src="{{ product.images.first.image.url }}" alt="{{ product.title }}" class="primary-image">
                 <!-- Thumbnails -->
-                <div class="thumbnails flex justify-center gap-2 pt-2"> <!-- Tailwind classes for layout -->
+                <div class="thumbnails">
                     {% for image in product.images.all %}
-                        <img onclick="updatePrimaryImage(this)" src="{{ image.image.url }}" alt="Thumbnail for {{ product.title }}" class="thumbnail-image w-16 h-16 object-cover rounded-lg cursor-pointer"> <!-- Tailwind classes for size, object fit, rounded corners, and pointer cursor -->
+                        <img onclick="updatePrimaryImage(this)" src="{{ image.image.url }}" alt="Thumbnail for {{ product.title }}" class="thumbnail-image">
                     {% endfor %}
                 </div>
             </div>
-            <div class="product-info w-full lg:w-1/2"> <!-- Tailwind classes for full width and half width on large screens -->
-
+            <div class="product-info">
                 <div class="product-detail-header">
                     <small class="store-name">MeowMart</small>
                     <h1 class="product-title">{{ product.title }}</h1>
@@ -68,6 +71,7 @@
     <script src="{% static 'CartFunctions.js' %}"></script>
     <script src="{% static 'CartVisual.js' %}"></script>
     <script>
+
 
         document.addEventListener('DOMContentLoaded', function() {
             updateCartUI(); // This function should be defined in 'CartFunctions.js'
