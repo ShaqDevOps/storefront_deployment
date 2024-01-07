@@ -29,6 +29,11 @@ header {
     padding: 0 5%;
 }
 
+.logo {
+    width: 50px;
+    height: auto;
+}
+
 nav ul {
     list-style: none;
     display: flex;

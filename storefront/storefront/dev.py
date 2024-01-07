@@ -14,8 +14,6 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 ALLOWED_HOSTS = [os.environ.get('DOMAIN')]
 #^ required if DEBUG is turned off
 
-    # 'shaqserver.com',
-    # '127.0.0.1',
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',

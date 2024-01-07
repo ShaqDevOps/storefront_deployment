@@ -1,0 +1,75 @@
+/* Position your cart summary at the top right of the header */
+.cart-summary {
+    /* position: absolute; */
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+    position: relative; /* This enables absolute positioning for child elements */
+}
+
+
+.cart-icon {
+    width: 5vw; /* Adjust as needed */
+    height: 5vw; /* Adjust as needed */
+    border-radius: 0%; /* This makes the image circular */
+    background-color: #f4f4f4; /* Or any other background color you want */
+    /* Add other styles as needed */
+    /* filter: invert(100%); */
+}
+
+
+.cart-quantity {
+    position: absolute;
+    top: 50%; /* Center vertically */
+    left: 80%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Adjust for precise centering */
+    color: white; /* Or any color that makes the text stand out over your image */
+    font-weight: bold;
+}
+
+/* Initially hide your cart dropdown */
+.cart-dropdown {
+    display: none;
+    position: absolute;
+    right: 10px;
+    top: 10%; /* Adjust based on the size of your header */
+    background-color: white;
+    width: 300px; /* Or as required */
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,.2);
+    z-index: 1000; /* Make sure it's above other content */
+}
+
+/* Style for individual cart items */
+.cart-dropdown ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.cart-dropdown li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+
+/* Style for cart item images */
+.cart-item-image {
+    width: 50px; /* Adjust as needed for your design */
+    height: 50px; /* Adjust as needed for your design */
+    object-fit: cover; /* This ensures the images keep their aspect ratio */
+    margin-right: 10px; /* Adds some space between the image and the text */
+}
+
+/* Additional styling for cart item list elements */
+.cart-item {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    border-bottom: 1px solid #ddd;
+}
+
+.cart-item-title, .cart-item-quantity, .cart-item-price {
+    margin-right: 10px; /* Adds space between text elements */
+}

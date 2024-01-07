@@ -91,8 +91,16 @@ class CartViewSet(CreateModelMixin,
                   GenericViewSet):
     queryset = Cart.objects.prefetch_related('items__product').all()
     serializer_class = CartSerializer
-
-
+    
+    def get_serializer_context(self):
+        
+        # This method returns a context dictionary to the serializer
+        context = super().get_serializer_context()
+        context.update({'request': self.request})
+                #send request data over to extract image 
+        return context
+    
+    
 class CartItemViewSet(ModelViewSet):
     http_method_names = ['get', 'post', 'patch', 'delete']
 

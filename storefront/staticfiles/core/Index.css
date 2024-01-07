@@ -8,7 +8,7 @@ body {
 }
 
 header {
-  background: #000000; /* Slightly lighter header background */
+  background: #333; /* Slightly lighter header background */
   color: #fff;
   padding: 1rem 0;
   text-align: center;
@@ -24,11 +24,7 @@ header {
 .header-content .logo {
   max-height: 5vw; /* Adjust the size as needed */
   width: auto;
-  background: url('logo.jpg') no-repeat center center;
-  background-size: cover; /* or contain, depending on your needs */
-  z-index: 10000;
 }
-
 
 
 nav ul {
@@ -43,7 +39,7 @@ nav ul li {
 }
 
 nav ul li a {
-  /* color: #fff; */
+  color: #fff;
   text-decoration: none;
   transition: color 0.3s ease;
 }

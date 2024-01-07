@@ -28,12 +28,14 @@
     <h1>All Products</h1>
     <div class="product-grid">
         {% for product in products %}
-        <div class="product-item">
-            <a href="{% url 'store:products-detail' pk=product.id %}">
-                {% if product.images.first %}
-                    <img src="{{ product.images.first.image.url }}" alt="{{ product.title }}">
+    <div class="product-item">
+        <a href="{% url 'store:products-detail' pk=product.id %}">
+            {% with product.images.all|first as first_image %}
+                {% if first_image %}
+                    <img src="{{ first_image.image.url }}" alt="{{ product.title }}">
                 {% endif %}
-                <h3>{{ product.title }}</h3>
+            {% endwith %}
+            <h3>{{ product.title }}</h3>
             </a>
             <p class="price">From ${{ product.unit_price }} USD</p>
             <!-- Other product details and actions -->

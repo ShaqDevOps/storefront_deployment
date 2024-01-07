@@ -26,6 +26,14 @@ class ProductImageSerializer(serializers.ModelSerializer):
             image = image
         )
         return self.instance 
+    
+    def get_image(self, obj):
+        request = self.context.get('request')
+            #Take url parts to make image.url
+        if request is not None:
+            return request.build_absolute_uri(obj.image.url)
+        return obj.image.url
+    
 
 class ProductSerializer(serializers.ModelSerializer):
     images = ProductImageSerializer(many = True, read_only = True)
@@ -52,9 +60,10 @@ class ReviewSerializer(serializers.ModelSerializer):
 
 
 class SimpleProductSerializer(serializers.ModelSerializer):
+    images = ProductImageSerializer(many = True , read_only = True)
     class Meta:
         model = Product
-        fields = ['id', 'title', 'unit_price']
+        fields = ['id', 'title', 'unit_price', 'images']
 
 
 class CartItemSerializer(serializers.ModelSerializer):
@@ -71,12 +80,12 @@ class CartItemSerializer(serializers.ModelSerializer):
 
 class CartSerializer(serializers.ModelSerializer):
     id = serializers.UUIDField(read_only=True)
-    items = CartItemSerializer(many=True, read_only=True)
+    items = CartItemSerializer(many = True, read_only = True)
     total_price = serializers.SerializerMethodField()
 
     def get_total_price(self, cart):
         return sum([item.quantity * item.product.unit_price for item in cart.items.all()])
-
+    
     class Meta:
         model = Cart
         fields = ['id', 'items', 'total_price']
