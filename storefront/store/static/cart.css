@@ -1,75 +1,83 @@
-/* Position your cart summary at the top right of the header */
+
+.cart-dropdown {
+    position: absolute;
+    top: 100%; /* Adjust if necessary to position just below the cart icon */
+    right: 0;
+    width: 20rem; /* Adjust the width as necessary */
+    background-color: white;
+    border: 1px solid #e5e5e5;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 50; /* High z-index to ensure it's on top of other content */
+    display: none; /* Initially hidden */
+}
+
+.cart-item-image {
+    width: 3rem; /* Adjust size as necessary */
+    height: 3rem;
+    object-fit: cover;
+    margin-right: 0.5rem; /* Space between image and text */
+}
+
+.cart-item-title {
+    flex-grow: 1;
+    margin-left: 0.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.cart-item-title {
+    font-size: 0.875rem; /* Use Tailwind text sizes if preferred */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cart-item-quantity,
+.cart-item-price {
+    margin-left: 0.75rem;
+}
+
 .cart-summary {
-    /* position: absolute; */
-    right: 10px;
-    top: 10px;
+    position: relative; /* This is necessary to position the quantity indicator relative to the cart icon */
     cursor: pointer;
-    position: relative; /* This enables absolute positioning for child elements */
 }
 
 
+/* Show the cart dropdown when hovering over the cart summary */
+.cart-summary:hover + .cart-dropdown {
+    display: block;
+}
+
 .cart-icon {
-    width: 5vw; /* Adjust as needed */
-    height: 5vw; /* Adjust as needed */
-    border-radius: 0%; /* This makes the image circular */
-    background-color: #f4f4f4; /* Or any other background color you want */
-    /* Add other styles as needed */
-    /* filter: invert(100%); */
+    width: 1rem; /* Adjust the size to make the cart image larger */
+    height: 1rem; /* Maintain the aspect ratio */
+    position: relative; /* To position the quantity indicator relative to this */
+    display: inline-block; /* To contain the absolute positioned quantity */
 }
 
 
 .cart-quantity {
     position: absolute;
-    top: 50%; /* Center vertically */
-    left: 80%; /* Center horizontally */
-    transform: translate(-50%, -50%); /* Adjust for precise centering */
-    color: white; /* Or any color that makes the text stand out over your image */
-    font-weight: bold;
-}
-
-/* Initially hide your cart dropdown */
-.cart-dropdown {
-    display: none;
-    position: absolute;
-    right: 10px;
-    top: 10%; /* Adjust based on the size of your header */
-    background-color: white;
-    width: 300px; /* Or as required */
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0,0,0,.2);
-    z-index: 1000; /* Make sure it's above other content */
-}
-
-/* Style for individual cart items */
-.cart-dropdown ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-
-.cart-dropdown li {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-}
-
-
-/* Style for cart item images */
-.cart-item-image {
-    width: 50px; /* Adjust as needed for your design */
-    height: 50px; /* Adjust as needed for your design */
-    object-fit: cover; /* This ensures the images keep their aspect ratio */
-    margin-right: 10px; /* Adds some space between the image and the text */
-}
-
-/* Additional styling for cart item list elements */
-.cart-item {
+    bottom: -8px; /* Negative value to move outside the icon's box */
+    right: -8px;
+    background-color: #ff3d00; /* Your preferred color for the indicator */
+    color: white;
+    border-radius: 50%; /* Rounded corners for a circular shape */
+    padding: 0.25rem; /* Padding to create the size of the circle */
+    font-size: 0.75rem; /* Adjust the font size as needed */
+    min-width: 1.5rem; /* Minimum width to form a circle shape */
+    min-height: 1.5rem; /* Minimum height to form a circle shape */
     display: flex;
     align-items: center;
-    padding: 5px;
-    border-bottom: 1px solid #ddd;
-}
-
-.cart-item-title, .cart-item-quantity, .cart-item-price {
-    margin-right: 10px; /* Adds space between text elements */
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Optional: shadow for depth */
+  }
+/* Ensure the dropdown is positioned correctly on larger screens */
+@media (min-width: 768px) {
+    .cart-dropdown {
+        top: 100%; /* Position just below the cart summary */
+        right: 0; /* Align to the right side of the cart summary */
+    }
 }

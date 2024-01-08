@@ -14,3 +14,9 @@ function changeQuantity(change) {
     currentQuantity += change;
     quantityInput.value = Math.max(currentQuantity, 1); // Prevent negative numbers
 }
+
+
+function toggleCart() {
+    const cartDropdown = document.getElementById('cart-dropdown');
+    cartDropdown.classList.toggle('hidden'); // Tailwind class to toggle visibility
+  }

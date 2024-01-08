@@ -1,5 +1,4 @@
-// Assuming CartFunctions.js contains these functions
-
+// Function to create a new cart
 function createCart() {
     return fetch('/store/carts/', {
         method: 'POST',
@@ -16,7 +15,6 @@ function createCart() {
         return response.json();
     })
     .then(data => {
-        console.log('Cart created:', data);
         localStorage.setItem('cartId', data.id); // Store in local storage to persist across sessions
         return data.id;
     })
@@ -26,10 +24,11 @@ function createCart() {
     });
 }
 
+// Function to update the cart UI
 function updateCartUI() {
     let cartId = localStorage.getItem('cartId');
     if (cartId) {
-        fetch(`/store/carts/${cartId}/`) // Fetch the updated cart
+        fetch(`/store/carts/${cartId}/`)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Error fetching cart data');
@@ -37,37 +36,32 @@ function updateCartUI() {
             return response.json();
         })
         .then(cartData => {
-            // Update cart count
             const cartCountElement = document.getElementById('cart-count');
-            cartCountElement.textContent = cartData.items.length; // The number of unique items
+            cartCountElement.textContent = cartData.items.length; // Update cart count
 
-            // Update cart dropdown items
             const cartItemsListElement = document.getElementById('cart-items-list');
             cartItemsListElement.innerHTML = ''; // Clear current items
             cartData.items.forEach(item => {
                 const li = document.createElement('li');
                 li.className = 'cart-item';
 
-                // Check if the product has images and use the first one, otherwise use a default image
-                const imageSrc = item.product.images && item.product.images.length > 0 
-                                 ? item.product.images[0].image 
-                                 : 'path/to/default/image.jpg';
-
+                const imageSrc = item.product.images.length > 0 ? item.product.images[0].image : 'path/to/default/image.jpg';
                 li.innerHTML = `
                     <img src="${imageSrc}" alt="${item.product.title}" class="cart-item-image">
-                    <span class="cart-item-title">${item.product.title}</span>
-                    <span class="cart-item-quantity">Qty: ${item.quantity}</span>
-                    <span class="cart-item-price">$${(item.quantity * item.product.unit_price).toFixed(2)}</span>
+                    <div class="cart-item-details">
+                        <span class="cart-item-title">${item.product.title}</span>
+                        <span class="cart-item-quantity">Qty: ${item.quantity}</span>
+                        <span class="cart-item-price">$${(item.quantity * item.product.unit_price).toFixed(2)}</span>
+                    </div>
                 `;
-
                 cartItemsListElement.appendChild(li);
             });
 
-            // Update total price
-            const cartTotalElement = document.getElementById('cart-total');
-            if (cartTotalElement) {
-                cartTotalElement.textContent = `Total: $${cartData.total_price.toFixed(2)}`;
-            }
+            // Add total price to the cart dropdown
+            const totalLi = document.createElement('li');
+            totalLi.className = 'cart-total';
+            totalLi.textContent = `Total: $${cartData.total_price.toFixed(2)}`;
+            cartItemsListElement.appendChild(totalLi);
         })
         .catch(error => {
             console.error('Error fetching cart:', error);
@@ -75,14 +69,11 @@ function updateCartUI() {
     }
 }
 
-
-
+// Function to add an item to the cart
 function addToCart(productId, quantity) {
     let cartId = localStorage.getItem('cartId');
-
     if (!cartId) {
         createCart().then(newCartId => {
-            cartId = newCartId;
             addToCart(productId, quantity); // Recursively call addToCart with the new cartId
         });
     } else {
@@ -96,8 +87,7 @@ function addToCart(productId, quantity) {
         })
         .then(response => response.json())
         .then(data => {
-            console.log('Added to cart:', data);
-            updateCartUI(); // Update the UI after adding to cart
+            updateCartUI(); // Update UI after adding to cart
         })
         .catch(error => console.error('Error:', error));
     }
@@ -187,113 +177,15 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-/*function createCart() {
-    return fetch('/store/carts/', {  // Adjust the URL to match your API endpoint
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRFToken': getCookie('csrftoken')
-        },
-        credentials: 'include' // Needed to include cookies with the request
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    })
-    .then(data => {
-        console.log('Cart created:', data);
-        // Here you can choose between localStorage or sessionStorage
-        localStorage.setItem('cartId', data.id); // Use localStorage if you want it to persist across sessions
-        // sessionStorage.setItem('cartId', data.id); // Use sessionStorage if you want it to persist only for the current session
-        return data.id;
-    })
-    .catch(error => {
-        console.error('Error creating cart:', error);
-        throw error;
-    });
-}
-
-function createCart() {
-    return fetch('/store/carts/', {  // Adjust the URL to match your API endpoint
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRFToken': getCookie('csrftoken')
-        },
-        credentials: 'include' // Needed to include cookies with the request
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    })
-    .then(data => {
-        console.log('Cart created:', data);
-        sessionStorage.setItem('cartId', data.id); // Saving the cartId to sessionStorage
-        return data.id;
-    })
-    .catch(error => {
-        console.error('Error creating cart:', error);
-        throw error;
-    });
-}
-
-function addToCart(productId, quantity) {
-    let cartId = sessionStorage.getItem('cartId');
-
-    if (!cartId) {
-        createCart().then(newCartId => {
-            // Now that we have a newCartId, add the item to the cart
-            addToCart(productId, quantity, newCartId); // Call addToCart with the new cartId
-        });
+function toggleCart() {
+    var cartDropdown = document.getElementById('cart-dropdown');
+    if (cartDropdown.style.display === 'block') {
+        cartDropdown.style.display = 'none';
     } else {
-        fetch(`/store/carts/${cartId}/items/`, {  // Adjust the URL to match your API endpoint for adding items
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': getCookie('csrftoken')
-            },
-            body: JSON.stringify({ product_id: productId, quantity: quantity })
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('Added to cart:', data);
-            // This function should be implemented to update the cart icon/count in your UI
-            updateCartUI(data); 
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
+        cartDropdown.style.display = 'block';
+        updateCartUI(); // This will update the cart UI when the dropdown is shown
     }
 }
-
-// This function updates the cart UI with the given cartData
-function updateCartUI(cartData) {
-    // Update the cart count display
-    const cartCountElement = document.getElementById('cart-count');
-    cartCountElement.textContent = cartData.items.length; // Update with the number of items in the cart
-
-    // Update the cart items list display
-    const cartItemsListElement = document.getElementById('cart-items-list');
-    cartItemsListElement.innerHTML = ''; // Clear current cart items
-
-    // Add each cart item to the list
-    cartData.items.forEach(item => {
-        const li = document.createElement('li');
-        li.textContent = `${item.product.title} - Quantity: ${item.quantity}`;
-        cartItemsListElement.appendChild(li);
-    });
-
-    // If you have some kind of subtotal or total cost display, update that here too
-    const cartTotalElement = document.getElementById('cart-total');
-    cartTotalElement.textContent = `Total: $${cartData.total_price.toFixed(2)}`;
-}
- */
+document.addEventListener('DOMContentLoaded', function() {
+    updateCartUI(); // This function should be defined in 'CartFunctions.js'
+});

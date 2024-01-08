@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ product.title }} - MeowMart</title>
+    <link href="{% static 'cart.css' %}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-100 font-sans leading-normal tracking-normal">
+    <header class="bg-white shadow relative" >
+        <div class="container mx-auto px-6 py-3">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <a href="{% url 'core:Home' %}" class="text-gray-800 text-xl font-bold md:text-2xl hover:text-gray-700">
+                        <img src="{% static 'core/logo.jpg' %}" alt="MeowMart Logo" class="h-10 w-10 md:h-16 md:w-16">
+                    </a>
+                    <nav class="md:ml-16">
+                        <ul class="items-center justify-center space-x-8 md:flex">
+                            <li><a href="{% url 'core:Home' %}" class="text-gray-800 hover:text-purple-600">Home</a></li>
+                            <li><a href="{% url 'store:products_page' %}" class="text-gray-800 hover:text-purple-600">Products</a></li>
+                            <li><a href="{% url 'core:SignIn' %}" class="text-gray-800 hover:text-purple-600">Sign In</a></li>
+                            <li><a href="{% url 'core:SignUp-SignUpForm' %}" class="text-gray-800 hover:text-purple-600">Create Account</a></li>
+                        </ul>
+                    </nav>
+                </div>
+
+                    <div class="cart-summary relative cursor-pointer" onclick="toggleCart()">
+                        <img src="{% static 'cat_cart.jpg' %}" alt="Cart" class="cart-icon h-12 w-12">
+                        <span id="cart-count" class="cart-quantity">0</span>
+                      </div>
+                      <div id="cart-dropdown" class="cart-dropdown hidden absolute right-0 mt-2 w-48 bg-white shadow-md z-50">
+                        <!-- Cart items will be dynamically inserted here -->
+                        <ul id="cart-items-list">
+                          <!-- Dynamically filled by JavaScript -->
+                        </ul>
+
+                      </div>               
+                </div>
+            </div>
+        </div>
+    </header>

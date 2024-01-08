@@ -1,81 +1,42 @@
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ product.title }} - MeowMart</title>
-    <link href="{% static 'product_detail.css' %}" rel="stylesheet">
-    <link href="{% static 'cart.css' %}" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+{%include 'store/header_with_cart.html'%}
 
-</head>
-<body>
-    <header>
-        <div class="header-content">
-            <img src="{% static 'logo.jpg' %}" alt="MeowMart Logo" class="logo">
-            <nav>
-                <ul>
-                    <li><a href="{% url 'core:Home' %}">Home</a></li>
-                    <li><a href="{% url 'store:products_page' %}">Products</a></li>
-                    <li><a href="{% url 'core:SignIn' %}">Sign In</a></li>
-                    <li><a href="{% url 'core:SignUp-SignUpForm' %}">Create Account</a></li>
-                </ul>
-            </nav>
-            <div class="cart-summary" onclick="toggleCart()">
-                <img src="{% static 'cat_cart.jpg' %}" alt="Cart" class="cart-icon">
-                <span id="cart-count" class="cart-quantity">0</span> <!-- Items text removed since you want the number inside the circle -->
-            </div>
-            
-        </div>
-        <div id="cart-dropdown" class="cart-dropdown">
-            <ul id="cart-items-list">
-                <!-- Cart items will be dynamically inserted here -->
-            </ul>
-        </div>
-    </header>
-
-    <main class="product-detail-main">
-        <div class="product-content">
-            <div class="product-gallery">
-                <img id="primary-image" src="{{ product.images.first.image.url }}" alt="{{ product.title }}" class="primary-image">
-                <!-- Thumbnails -->
-                <div class="thumbnails">
+    <main class="flex flex-col items-center px-4 sm:px-8 my-8">
+        <div class="flex flex-col sm:flex-row justify-between items-start bg-white p-4 sm:p-6 rounded-lg shadow-lg w-full max-w-4xl">
+            <div class="w-full sm:w-1/2 p-4">
+                <img id="primary-image" src="{{ product.images.first.image.url }}" alt="{{ product.title }}" class="w-full h-auto object-cover rounded">
+                <div class="flex justify-center mt-4">
+                    <!-- Thumbnails -->
                     {% for image in product.images.all %}
-                        <img onclick="updatePrimaryImage(this)" src="{{ image.image.url }}" alt="Thumbnail for {{ product.title }}" class="thumbnail-image">
+                        <img onclick="updatePrimaryImage(this)" src="{{ image.image.url }}" alt="Thumbnail for {{ product.title }}" class="w-16 h-16 object-cover rounded-full m-1 cursor-pointer hover:opacity-75">
                     {% endfor %}
                 </div>
             </div>
-            <div class="product-info">
-                <div class="product-detail-header">
-                    <small class="store-name">MeowMart</small>
-                    <h1 class="product-title">{{ product.title }}</h1>
-                    <span class="product-price">Price: ${{ product.unit_price }}</span>
+            <div class="w-full sm:w-1/2 p-4">
+                <div>
+                    <small class="uppercase text-gray-600 text-xs">{{ product.brand }}</small>
+                    <h1 class="text-2xl font-bold my-2">{{ product.title }}</h1>
+                    <span class="text-xl text-gray-900">{{ product.unit_price }}</span>
                 </div>
-                <div class="product-purchase-info">
-                    <div class="quantity-selector">
-                        <button type="button" onclick="changeQuantity(-1)">-</button>
-                        <input type="text" value="1" id="quantity-input">
-                        <button type="button" onclick="changeQuantity(1)">+</button>
+                <div class="mt-4">
+                    <div class="flex items-center mb-4">
+                        <button type="button" onclick="changeQuantity(-1)" class="text-lg rounded-l bg-gray-200 px-4 py-2 hover:bg-gray-300">-</button>
+                        <input type="text" value="1" id="quantity-input" class="text-center bg-white px-4 py-2 w-16">
+                        <button type="button" onclick="changeQuantity(1)" class="text-lg rounded-r bg-gray-200 px-4 py-2 hover:bg-gray-300">+</button>
                     </div>
-                    <button class="add-to-cart-btn" type="button" onclick="addToCart('{{ product.id }}', document.getElementById('quantity-input').value)">Add to Cart</button>
+                    <button class="w-full bg-purple-700 text-white px-4 py-2 rounded hover:bg-purple-800" type="button" onclick="addToCart('{{ product.id }}', document.getElementById('quantity-input').value)">Add to Cart</button>
                 </div>
-                <div class="product-detail-description">
-                    <p>{{ product.description }}</p>
+                <div class="product-description mt-4">
+                    <p class="text-gray-700">{{ product.description }}</p>
                 </div>
             </div>
         </div>
     </main>
+    
 
 
     <script src="{% static 'CartFunctions.js' %}"></script>
     <script src="{% static 'CartVisual.js' %}"></script>
-    <script>
 
-
-        document.addEventListener('DOMContentLoaded', function() {
-            updateCartUI(); // This function should be defined in 'CartFunctions.js'
-        });
-    </script>
 </body>
 </html>

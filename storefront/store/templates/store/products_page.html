@@ -1,29 +1,8 @@
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Products</title>
-    <link rel="stylesheet" href="{% static 'product_page.css' %}">
-</head>
-<body>
-    <header>
-        <div class="header-content">
-            <img src="{% static 'logo.jpg' %}" alt="MeowMart Logo" class="logo">
+{%include 'store/header_with_cart.html'%}
 
-            <nav>
-                <ul>
-                    <li><a href="{% url 'core:Home' %}">Home</a></li>
-                    <li><a href="{% url 'store:products_page' %}">Products</a></li>
-                    <li><a href="{% url 'core:SignIn' %}">Sign In</a></li>
-                    <li><a href="{% url 'core:SignUp-SignUpForm' %}">Create Account</a></li>
-                </ul>
-            </nav>
-        
 
-        </div>
-
+<link rel="stylesheet" href="{% static 'product_page.css' %}">
     </header>
     <h1>All Products</h1>
     <div class="product-grid">
@@ -45,6 +24,11 @@
     {% endfor %}
     
     </div>
+
+
+
+    <script src="{% static 'CartFunctions.js' %}"></script>
+    <script src="{% static 'CartVisual.js' %}"></script>
 </body>
 </html>
 
